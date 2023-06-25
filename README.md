@@ -235,7 +235,7 @@ If the specified catalogue with the ID is not found, the HTTP status code in the
 
 ### List Public API Catalogues
 #### GET api/catalogues/publicapis
-Returns a list of movies with their opening crawls and comment count. The list is sorted by release date from earliest to newest.\
+Returns a list of catalogues fetched from https://api.publicapis.org/entries.\
 Request Parameters\
 None.\
 Response
@@ -243,24 +243,33 @@ Response
 
 ```json
 {
-    "status": "success",
-    "data": [
-        {
-            "name": "The Empire Strikes Back",
-            "opening_crawl": "It is a dark time for the\r\nRebellion. Although the Death\r\nStar has been ..",
-            "comment_count": 1
-        },
-        {
-            "name": "Return of the Jedi",
-            "opening_crawl": "Luke Skywalker has returned to\r\nhis home planet of Tatooine in\r\nan attend...",
-            "comment_count": 1
-        },
-        {
-            "name": "The Phantom Menace",
-            "opening_crawl": "Turmoil has engulfed the\r\nGalactic Republic. The taxation\r\nof trade ....",
-            "comment_count": 8
-        }
-    ]
+    "status": 200,
+    "success": true,
+    "data": {
+        "count": 1425,
+        "entries": [
+            {
+                "API": "AdoptAPet",
+                "Description": "Resource to help get pets adopted",
+                "Auth": "apiKey",
+                "HTTPS": true,
+                "Cors": "yes",
+                "Link": "https://www.adoptapet.com/public/apis/pet_list.html",
+                "Category": "Animals"
+            },
+            {
+                "API": "Axolotl",
+                "Description": "Collection of axolotl pictures and facts",
+                "Auth": "",
+                "HTTPS": true,
+                "Cors": "no",
+                "Link": "https://theaxolotlapi.netlify.app/",
+                "Category": "Animals"
+            },
+            .....
+            .....
+        ]
+    }
 }
 ```
 </br>
@@ -271,7 +280,7 @@ The response for request failures or any other error are rather simple.
 {
 	"status": 500,
     "success": false,
-    "message": 'Internal server error'
+    "message": "Internal server error"
 }
 ```
 
