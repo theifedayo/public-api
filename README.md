@@ -61,7 +61,7 @@ The server will run on http://localhost:3000 by default
 Base URL[dev]: http://localhost:3000
 ### List Catalogues
 #### GET api/catalogues/
-Returns a list of catalogues with their opening crawls and comment count.\
+Returns a list of catalogues with their API, Description, Auth, HTTPS, Cors, Link, Category.\
 Request Parameters\
 None.\
 Response
@@ -130,13 +130,13 @@ If the specified catalogue with the ID is not found, the HTTP status code in the
 #### POST api/catalogues/
 Adds a new catalogue\
 Request Body
-* `API`(string, required) - The text of the comment.
-* `Description`(string, required) - The text of the comment.
-* `Auth`(string, required) - The text of the comment.
-* `HTTPS`(string, required) - The text of the comment.
-* `Cors`(string, required) - The text of the comment.
-* `Link`(string, required) - The text of the comment.
-* `Category`(string, required) - The text of the comment.
+* `API`(string, required) - name of API.
+* `Description`(string, required) - The description of the API.
+* `Auth`(string, required) - Auth required for accessing API.
+* `HTTPS`(string, required) - security.
+* `Cors`(string, required) - Cross Origin.
+* `Link`(string, required) - URL for API.
+* `Category`(string, required) - Category of API.
 
 Example request body:
 ```json
@@ -179,13 +179,13 @@ Updates catalogue data for the specified catalogue.\
 Request Parameters
 * `id` (int, required) - The ID of the catalogue to be updated in the database.
 Request Body
-* `API`(string, required) - The text of the comment.
-* `Description`(string, required) - The text of the comment.
-* `Auth`(string, required) - The text of the comment.
-* `HTTPS`(string, required) - The text of the comment.
-* `Cors`(string, required) - The text of the comment.
-* `Link`(string, required) - The text of the comment.
-* `Category`(string, required) - The text of the comment.
+* `API`(string, required) - name of API.
+* `Description`(string, required) - The description of the API.
+* `Auth`(string, required) - Auth required for accessing API.
+* `HTTPS`(string, required) - security.
+* `Cors`(string, required) - Cross Origin.
+* `Link`(string, required) - URL for API.
+* `Category`(string, required) - Category of API.
 
 Example request body:
 ```json
@@ -235,7 +235,7 @@ If the specified catalogue with the ID is not found, the HTTP status code in the
 
 ### List Public API Catalogues
 #### GET api/catalogues/publicapis
-Returns a list of catalogues fetched from https://api.publicapis.org/entries.\
+Returns a list of catalogues fetched from https://api.publicapis.org/entries.
 Request Parameters\
 None.\
 Response
