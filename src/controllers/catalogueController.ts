@@ -22,7 +22,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal servert error'
+        message: 'Internal server error'
       });
     }
   }
@@ -49,7 +49,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal serverx error'
+        message: 'Internal server error'
       });
     }
   }
@@ -67,7 +67,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal serverxt error'
+        message: 'Internal server error'
       });
     }
   }
@@ -95,7 +95,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal servertt error'
+        message: 'Internal server error'
       });
     }
   }
@@ -104,10 +104,9 @@ export class CatalogueController {
     try {
       const catalogueId: number = parseInt(req.params.id, 10);
       const deleted: boolean = await this.catalogueService.deleteCatalogue(catalogueId);
-
       if (deleted) {
-        return res.status(204).json({
-          status: 204,
+        return res.status(200).json({
+          status: 200,
           success: true,
           message: 'Catalogue deleted successfully'
         });
@@ -122,7 +121,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal servertd error'
+        message: 'Internal server error'
       });
     }
   }
@@ -141,7 +140,7 @@ export class CatalogueController {
       res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal servers error'
+        message: 'Internal server error'
       });
     }
   }

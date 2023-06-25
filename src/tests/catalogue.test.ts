@@ -62,7 +62,7 @@ describe('CATALOGUE ENDPOINTS', () => {
 
     it('should delete a catalogue', async () => {
       const response = await request.delete(`/api/catalogues/${catalogueId}`);
-      expect(response.status).to.equal(204);
+      expect(response.status).to.equal(200);
     });
   
 
