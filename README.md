@@ -296,5 +296,5 @@ Database connection has been established successfully.
 
 
   7 passing (7s)
-  ```
+```
 
