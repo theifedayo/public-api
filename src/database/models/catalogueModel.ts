@@ -1,49 +1,61 @@
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../database';
 
-@Table({
-  timestamps: false,
-  tableName: "catalogues",
-})
 export class Catalogue extends Model {
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  API!: string;
-
-  @Column({
-    type: DataType.TEXT,
-    allowNull: false,
-  })
-  Description!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  Auth!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  HTTPS!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  Cors!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  Link!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  Category!: string;
+  public id!: number;
+  public API!: string;
+  public Description!: string;
+  public Auth!: string;
+  public HTTPS!: string;
+  public Cors!: string;
+  public Link!: string;
+  public Category!: string;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
+
+Catalogue.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    API: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    Auth: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    HTTPS: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+    },
+    Cors: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    },
+    Link: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    },
+    Category: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+    },
+  },
+  {
+    timestamps: true,
+    sequelize,
+    //modelName: 'Catalogue',
+    //paranoid: true
+  }
+);
+
+export default Catalogue;
