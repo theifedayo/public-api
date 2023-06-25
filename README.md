@@ -271,7 +271,7 @@ The response for request failures or any other error are rather simple.
 {
 	"status": 500,
     "success": false,
-    "message": 'Internal servert error'
+    "message": 'Internal server error'
 }
 ```
 
