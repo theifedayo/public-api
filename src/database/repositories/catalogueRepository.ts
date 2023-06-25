@@ -1,5 +1,6 @@
 import { Catalogue } from '../models/catalogueModel';
 
+
 export class CatalogueRepository {
   public async getAllCatalogues(): Promise<Catalogue[]> {
     return await Catalogue.findAll();
@@ -10,7 +11,7 @@ export class CatalogueRepository {
   }
 
   public async createCatalogue(data: Partial<Catalogue>): Promise<Catalogue> {
-    return await Catalogue.create(data);
+    return await Catalogue.create(data) as Catalogue;
   }
 
   public async updateCatalogue(id: number, data: Partial<Catalogue>): Promise<[number, Catalogue[]]> {

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Catalogue } from '../database/models/catalogueModel';
 import { CatalogueService } from '../services/catalogueService';
+import { makeApiRequest } from '../utils/apiClient';
 
 export class CatalogueController {
   private catalogueService: CatalogueService;
@@ -9,58 +10,98 @@ export class CatalogueController {
     this.catalogueService = catalogueService;
   }
 
-  public async getAllCatalogues(req: Request, res: Response): Promise<void> {
+  public async getAllCatalogues(req: Request, res: Response): Promise<any> {
     try {
       const catalogues: Catalogue[] = await this.catalogueService.getAllCatalogues();
-      res.json(catalogues);
+      return res.status(201).json({
+        status: 200,
+        success: true,
+        data: catalogues
+      });
     } catch (error) {
-        console.log(error)
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
     }
   }
 
-  public async getCatalogueById(req: Request, res: Response): Promise<void> {
+  public async getCatalogueById(req: Request, res: Response): Promise<any> {
     try {
       const catalogueId: number = parseInt(req.params.id, 10);
       const catalogue: Catalogue | null = await this.catalogueService.getCatalogueById(catalogueId);
 
       if (catalogue) {
-        res.json(catalogue);
+        return res.status(201).json({
+          status: 200,
+          success: true,
+          data: catalogue
+        });;
       } else {
-        res.status(404).json({ error: 'catalogue not found' });
+        return res.status(404).json({ 
+          status: 404,
+          success: false,
+          message: 'Catalogue not found'
+        });;
       }
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
     }
   }
 
-  public async createCatalogue(req: Request, res: Response): Promise<void> {
+  public async createCatalogue(req: Request, res: Response): Promise<any> {
     try {
       const catalogueData: Partial<Catalogue> = req.body;
       const createdCatalogue: Catalogue = await this.catalogueService.createCatalogue(catalogueData);
-      res.status(201).json(createdCatalogue);
+      return res.status(201).json({
+        status: 201,
+        success: true,
+        data: createdCatalogue
+      });
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
     }
   }
 
-  public async updateCatalogue(req: Request, res: Response): Promise<void> {
+  public async updateCatalogue(req: Request, res: Response): Promise<any> {
     try {
       const catalogueId: number = parseInt(req.params.id, 10);
+      console.log(catalogueId)
       const catalogueData: Partial<Catalogue> = req.body;
       const updatedCatalogue: Catalogue | null = await this.catalogueService.updateCatalogue(catalogueId, catalogueData);
 
       if (updatedCatalogue) {
-        res.json(updatedCatalogue);
+        return res.status(200).json({ 
+          status: 500,
+          success: true,
+          data: updatedCatalogue
+        });
       } else {
-        res.status(404).json({ error: 'Catalogue not found' });
+        rreturn es.status(404).json({
+          status: 404,
+          success: false,
+          message: 'Catalogue not found'
+        });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
     }
   }
 
-  public async deleteCatalogue(req: Request, res: Response): Promise<void> {
+  public async deleteCatalogue(req: Request, res: Response): Promise<any> {
     try {
       const catalogueId: number = parseInt(req.params.id, 10);
       const deleted: boolean = await this.catalogueService.deleteCatalogue(catalogueId);
@@ -71,7 +112,25 @@ export class CatalogueController {
         res.status(404).json({ error: 'C not found' });
       }
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+      return res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
+    }
+  }
+
+
+  public async getPublicapiCatalogues(req: Request, res: Response): Promise<void> {
+    try {
+      const catalogues: Catalogue[] = await makeApiRequest("https://api.publicapis.org/entries");
+      res.json(catalogues);
+    } catch (error) {
+      res.status(500).json({ 
+        status: 500,
+        success: false,
+        message: 'Internal server error'
+      });
     }
   }
 }

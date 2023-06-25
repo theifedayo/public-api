@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../database';
 
+
 export class Catalogue extends Model {
   public id!: number;
   public API!: string;
@@ -53,9 +54,9 @@ Catalogue.init(
   {
     timestamps: true,
     sequelize,
-    //modelName: 'Catalogue',
+    modelName: 'Catalogue',
     //paranoid: true
   }
 );
 
-export default Catalogue;
+export default new Catalogue;

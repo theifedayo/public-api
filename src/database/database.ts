@@ -1,15 +1,14 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Catalogue } from './models/catalogueModel';
 
 
 const sequelize = new Sequelize({
   dialect: 'mysql',
-  host: process.env.DB_HOST || "127.0.0.1",
+  host: process.env.DB_HOST || "db4free.net",
   username: process.env.DB_USERNAME || "ifedayo",
-  password: process.env.DB_PASSWORD || "ifedayo",
+  password: process.env.DB_PASSWORD || "ifedayo010",
   database: process.env.DB_DATABASE || "kreditask",
   logging: false,
-  //models: [Catalogue]
+ // models: [Catalogue]
 });
 
 export async function connectDatabase(): Promise<void> {

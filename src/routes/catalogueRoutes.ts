@@ -16,4 +16,8 @@ router.post('/', catalogueController.createCatalogue.bind(catalogueController));
 router.put('/:id', catalogueController.updateCatalogue.bind(catalogueController));
 router.delete('/:id', catalogueController.deleteCatalogue.bind(catalogueController));
 
+//router for api call to https://api.publicapis.org/entries
+router.get('/publicapis', catalogueController.getPublicapiCatalogues.bind(catalogueController));
+
+
 export default router;
