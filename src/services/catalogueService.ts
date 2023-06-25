@@ -20,14 +20,13 @@ export class CatalogueService {
     return await this.catalogueRepository.createCatalogue(data);
   }
 
-  public async updateCatalogue(id: number, data: Partial<Catalogue>): Promise<Catalogue | null> {
+  public async updateCatalogue(id: number, data: Partial<Catalogue>): Promise<any | null> {
     const [rowsAffected, updatedCatalogues] = await this.catalogueRepository.updateCatalogue(id, data);
 
     if (rowsAffected === 0) {
       return null; // No Catalogue found with the specified ID
     }
-
-    return updatedCatalogues[0];
+    return updatedCatalogues;
   }
 
   public async deleteCatalogue(id: number): Promise<boolean> {

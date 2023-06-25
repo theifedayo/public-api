@@ -9,15 +9,14 @@ const catalogueService: CatalogueService = new CatalogueService(catalogueReposit
 const catalogueController: CatalogueController = new CatalogueController(catalogueService);
 
 
+//router for api call to https://api.publicapis.org/entries
+router.get('/publicapis', catalogueController.getPublicapiCatalogues.bind(catalogueController));
+
 
 router.get('/', catalogueController.getAllCatalogues.bind(catalogueController));
 router.get('/:id', catalogueController.getCatalogueById.bind(catalogueController));
 router.post('/', catalogueController.createCatalogue.bind(catalogueController));
 router.put('/:id', catalogueController.updateCatalogue.bind(catalogueController));
 router.delete('/:id', catalogueController.deleteCatalogue.bind(catalogueController));
-
-//router for api call to https://api.publicapis.org/entries
-router.get('/publicapis', catalogueController.getPublicapiCatalogues.bind(catalogueController));
-
 
 export default router;

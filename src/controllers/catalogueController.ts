@@ -13,7 +13,7 @@ export class CatalogueController {
   public async getAllCatalogues(req: Request, res: Response): Promise<any> {
     try {
       const catalogues: Catalogue[] = await this.catalogueService.getAllCatalogues();
-      return res.status(201).json({
+      return res.status(200).json({
         status: 200,
         success: true,
         data: catalogues
@@ -22,7 +22,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal servert error'
       });
     }
   }
@@ -33,11 +33,11 @@ export class CatalogueController {
       const catalogue: Catalogue | null = await this.catalogueService.getCatalogueById(catalogueId);
 
       if (catalogue) {
-        return res.status(201).json({
+        return res.status(200).json({
           status: 200,
           success: true,
           data: catalogue
-        });;
+        });
       } else {
         return res.status(404).json({ 
           status: 404,
@@ -49,7 +49,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal serverx error'
       });
     }
   }
@@ -67,7 +67,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal serverxt error'
       });
     }
   }
@@ -75,18 +75,17 @@ export class CatalogueController {
   public async updateCatalogue(req: Request, res: Response): Promise<any> {
     try {
       const catalogueId: number = parseInt(req.params.id, 10);
-      console.log(catalogueId)
       const catalogueData: Partial<Catalogue> = req.body;
       const updatedCatalogue: Catalogue | null = await this.catalogueService.updateCatalogue(catalogueId, catalogueData);
 
       if (updatedCatalogue) {
         return res.status(200).json({ 
-          status: 500,
+          status: 200,
           success: true,
-          data: updatedCatalogue
+          data: catalogueData
         });
       } else {
-        rreturn es.status(404).json({
+        return res.status(404).json({
           status: 404,
           success: false,
           message: 'Catalogue not found'
@@ -96,7 +95,7 @@ export class CatalogueController {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal servertt error'
       });
     }
   }
@@ -107,29 +106,42 @@ export class CatalogueController {
       const deleted: boolean = await this.catalogueService.deleteCatalogue(catalogueId);
 
       if (deleted) {
-        res.status(204).send();
+        return res.status(204).json({
+          status: 204,
+          success: true,
+          message: 'Catalogue deleted successfully'
+        });
       } else {
-        res.status(404).json({ error: 'C not found' });
+        return res.status(404).json({
+          status: 404,
+          success: false,
+          message: 'Catalogue not found'
+        });
       }
     } catch (error) {
       return res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal servertd error'
       });
     }
   }
 
 
-  public async getPublicapiCatalogues(req: Request, res: Response): Promise<void> {
+  public async getPublicapiCatalogues(req: Request, res: Response): Promise<any> {
     try {
       const catalogues: Catalogue[] = await makeApiRequest("https://api.publicapis.org/entries");
-      res.json(catalogues);
+      return res.status(200).json({
+        status: 200,
+        success: true,
+        data: catalogues
+      });
     } catch (error) {
+      console.log(error)
       res.status(500).json({ 
         status: 500,
         success: false,
-        message: 'Internal server error'
+        message: 'Internal servers error'
       });
     }
   }
