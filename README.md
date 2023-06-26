@@ -20,10 +20,10 @@ npm install
 ```
 Add a .env file following sample.env file example with the values of each variable
 ```.env
-USERNAME=
-PASSWORD=
+DB_USERNAME=
+DB_PASSWORD=
 DATABASE=
-HOST=
+DB_HOST=
 PORT=3000
 NODE_ENV=
 ```
